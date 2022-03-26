@@ -53,6 +53,10 @@ const reservationSchema = mongoose.Schema({
     },
     email:{
         type: String
+    },
+    pnr:{
+        type: String,
+        required: true,
     }
 })
 
