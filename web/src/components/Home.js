@@ -131,7 +131,7 @@ class Home extends Component {
         Math.abs(this.state.to.fair - this.state.from.fair) *
         this.state.trainClass.fairRatio *
         this.state.qty;
-      amount = amount.toFixed(2);
+      amount = amount.toFixed(2) * 10;
       var discount = (user && user.discount ? 0.1 * amount : 0).toFixed(2);
       var total = (amount - discount).toFixed(2);
       this.setState({ amount: amount, discount: discount, total: total });
@@ -253,7 +253,7 @@ class Home extends Component {
                     <td align='right'>Rs {this.state.amount}</td>
                   </tr>
                   <tr>
-                    <td align='right'>Discount</td>
+                    <td align='right'>Service Charge</td>
                     <td align='right'>Rs {this.state.discount}</td>
                   </tr>
                   <tr>

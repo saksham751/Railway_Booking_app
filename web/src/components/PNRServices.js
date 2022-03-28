@@ -3,10 +3,12 @@ import { routes, route, trainsByRoute, classes, schedules } from "../Services";
 
 import { Button, Form, Col, Row } from "react-bootstrap";
 //import { Button, Form, Col, Row, Table } from "react-bootstrap";
-import Select from "react-select";
+//import Select from "react-select";
 //import DatePicker from "react-datepicker";
 import moment from "moment";
 
+//import { getReservations } from "../Services";
+//import { toast } from "react-toastify";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -184,19 +186,18 @@ class Home extends Component {
           <Form.Row style={{ width: "75%" }}>
             <Form.Group as={Col} controlId='from'>
               <Form.Label>Enter PNR</Form.Label>
-              <Select
-                options={this.state.fromOptions}
-                onChange={this.handleChange("from")}
+              <Form.Control
+                placeholder='PNR No.'
+                onChange={this.handleQtyChange()}
               />
             </Form.Group>
           </Form.Row>
           <Form.Row style={{ width: "75%" }}>
             <Form.Group as={Col} controlId='from'>
               <Form.Label>Enter Seat No</Form.Label>
-              <Select
-                options={this.state.trains}
-                onChange={this.handleChange("train")}
-                value={this.state.train}
+              <Form.Control
+                placeholder='Seat No.'
+                onChange={this.handleQtyChange()}
               />
             </Form.Group>
           </Form.Row>
