@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { routes, route, trainsByRoute, classes, schedules } from "../Services";
 
-import { Button, Form, Col, Row, Table } from "react-bootstrap";
-import Select from "react-select";
-import DatePicker from "react-datepicker";
+import { Button, Form, Col, Row } from "react-bootstrap";
+//import { Button, Form, Col, Row, Table } from "react-bootstrap";
+//import Select from "react-select";
+//import DatePicker from "react-datepicker";
 import moment from "moment";
 
+//import { getReservations } from "../Services";
+//import { toast } from "react-toastify";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -131,7 +134,7 @@ class Home extends Component {
         Math.abs(this.state.to.fair - this.state.from.fair) *
         this.state.trainClass.fairRatio *
         this.state.qty;
-      amount = amount.toFixed(2) * 10;
+      amount = amount.toFixed(2);
       var discount = (user && user.discount ? 0.1 * amount : 0).toFixed(2);
       var total = (amount - discount).toFixed(2);
       this.setState({ amount: amount, discount: discount, total: total });
@@ -178,100 +181,30 @@ class Home extends Component {
               marginBottom: 20,
             }}
           >
-            <h4>Book Train Tickets</h4>
+            <h4>Change Seat</h4>
           </Form.Row>
           <Form.Row style={{ width: "75%" }}>
             <Form.Group as={Col} controlId='from'>
-              <Form.Label>From</Form.Label>
-              <Select
-                options={this.state.fromOptions}
-                onChange={this.handleChange("from")}
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId='to'>
-              <Form.Label>To</Form.Label>
-              <Select
-                options={this.state.toOptions}
-                onChange={this.handleChange("to")}
-                value={this.state.to}
-              />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row style={{ width: "75%" }}>
-            <Form.Group as={Col} controlId='from'>
-              <Form.Label>Train</Form.Label>
-              <Select
-                options={this.state.trains}
-                onChange={this.handleChange("train")}
-                value={this.state.train}
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId='to'>
-              <Form.Label>Class</Form.Label>
-              <Select
-                options={this.state.classes}
-                onChange={this.handleChange("trainClass")}
-                value={this.state.trainClass}
-              />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row style={{ width: "75%" }}>
-            <Form.Group as={Col} controlId='from'>
-              <Form.Label>Time</Form.Label>
-              <Select
-                options={this.state.schedules}
-                onChange={this.handleChange("time")}
-                value={this.state.time}
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId='formGridEmail'>
-              <Form.Label>No of Tickets</Form.Label>
+              <Form.Label>Enter PNR</Form.Label>
               <Form.Control
-                placeholder='qty'
+                placeholder='PNR No.'
                 onChange={this.handleQtyChange()}
               />
             </Form.Group>
           </Form.Row>
-          <Form.Row style={{ width: "75%", paddingBottom: 20 }}>
-            <Col md={6} lg={6} xl={6}>
-              <Form.Label>Date</Form.Label>
-              <DatePicker
-                className='form-control'
-                onChange={this.handleDateChange}
-                minDate={new Date()}
-                value={this.state.date}
-                placeholderText='YYYY-MM-DD'
-              />
-            </Col>
-          </Form.Row>
-          <Form.Row style={{ width: "75%", paddingLeft: 5, align: "right" }}>
-            {this.state.amount && (
-              <Table striped bordered hover size='sm'>
-                <tbody>
-                  <tr>
-                    <td align='right'>Amount</td>
-                    <td align='right'>Rs {this.state.amount}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>Service Charge</td>
-                    <td align='right'>Rs {this.state.discount}</td>
-                  </tr>
-                  <tr>
-                    <td align='right'>Total</td>
-                    <td align='right'>Rs {this.state.total}</td>
-                  </tr>
-                </tbody>
-              </Table>
-            )}
-          </Form.Row>
           <Form.Row style={{ width: "75%" }}>
-            {this.state.showErr && (
-              <p style={{ color: "red" }}>{this.state.errMsg}</p>
-            )}
+            <Form.Group as={Col} controlId='from'>
+              <Form.Label>Enter Seat No</Form.Label>
+              <Form.Control
+                placeholder='Seat No.'
+                onChange={this.handleQtyChange()}
+              />
+            </Form.Group>
           </Form.Row>
+
           <Form.Row style={{ width: "75%", padding: 5 }}>
             <Button variant='primary' type='submit'>
-              Make Reservation
+              Submit
             </Button>
           </Form.Row>
         </Row>
