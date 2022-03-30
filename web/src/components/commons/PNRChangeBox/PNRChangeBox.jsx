@@ -40,9 +40,21 @@ const PNRCard = (props) => {
   );
 }
 
+const MessageBox = (props) => {
+  return (
+    <div className={`PNRChangePane`}>
+        <div className='header'>Message</div>
+        <div className='content'>
+          {props.comment}
+        </div>
+    </div>
+  );
+}
+
 const PNRChangeBox = (props) => {
-  const {oldUser, newUser, from: fromPNR, to: toPNR,_id: id} = props.data;
+  const {oldUser, newUser, from: fromPNR, to: toPNR,_id: id,comment} = props.data;
   const [loading,setLoading] = useState(false);
+  const [openMessage, setOpenMessage] = useState(false);
 
   const handleAccept =()=>{
     setLoading(true);
@@ -84,14 +96,15 @@ const PNRChangeBox = (props) => {
         console.log(err)
     })
   }
-  
+
   return (
-    <div className='PNRChangeBox'>
+    <div className='PNRChangeBox' >
       <div className='PNRContent'>
-        <PNRCard pnr={fromPNR} user={oldUser} />
+      {openMessage?<MessageBox comment={comment}/>:<PNRCard pnr={fromPNR} user={oldUser} />}
         <PNRCard pnr={toPNR} user={newUser} toCard />
       </div>
       <div className='PNRControls'>
+        <p className='openMessage' onMouseEnter={() => setOpenMessage(true)} onMouseLeave={() => setOpenMessage(false)}>{openMessage?"Close message":"Open message"}</p>
         <Button variant="primary" type="submit" size="sm" onClick={handleAccept}>{loading?<LoadingBtn/>:"Accept"}</Button>
         <Button variant="secondary" type="submit" size="sm" onClick={handleReject}>{loading?<LoadingBtn/>:"Reject"}</Button>
       </div>

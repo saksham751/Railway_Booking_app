@@ -43,7 +43,7 @@ const PNRChangeModal = ({oldPNR,close}) => {
           <input placeholder=" " type="text" className='PNRModalText' onChange={(e)=>setNewPNR(e.target.value)}/>
           <label className='PNRModallabel'>New PNR</label>
         </div>
-        <textarea className='PNRModalTextArea' rows="6" cols="50" placeholder="Comment ..." onChange={(e)=>setComment(e.target.value)}/>
+        <textarea className='PNRModalTextArea' rows="6" cols="50" placeholder="Message to the owner ..." onChange={(e)=>setComment(e.target.value)}/>
         </div>
         <Button
           variant='danger'
