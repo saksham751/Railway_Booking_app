@@ -95,10 +95,12 @@ class Payment extends Component {
         var user = localStorage.getItem('user')
         if (user) {
             user = JSON.parse(user)
+            console.log(user);
             const reservation = {
                 ...paymentMethod,
                 user: user._id,
                 email: user.email,
+                name: `${user.fname} ${user.lname}`,
                 from: state.from.value,
                 to: state.to.value,
                 train: state.train.value,

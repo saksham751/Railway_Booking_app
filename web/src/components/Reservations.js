@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-
 import { Row, Col, Button, Card, Pagination } from "react-bootstrap";
 import { getReservations, deleteReservation } from "../Services";
+import PNRChangeModal from "./commons/PNRChangeModal/PNRChangeModal";
 import { toast } from "react-toastify";
 
 class Reservations extends Component {
@@ -13,6 +13,8 @@ class Reservations extends Component {
       offset: 1,
       lastPage: 1,
       paginateItems: [],
+      openModal: false,
+      pnrToChange:0
     };
   }
 
@@ -59,13 +61,17 @@ class Reservations extends Component {
     }
   };
 
+  openPNRModal = (pnr) => {
+    this.setState({ openModal: true,pnrToChange:pnr});
+  }
+
   paginateReservations = () => {
     let items = [];
     const offset = (this.state.offset - 1) * 5;
-
     for (let number = offset; number < offset + 5; number++) {
       const reservation = this.state.reservations[number];
       if (reservation) {
+        console.log(reservation);
         items.push(
           <Row style={{ width: "75%" }} key={number}>
             <Col>
@@ -101,7 +107,15 @@ class Reservations extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col style={{ paddingTop: 10 }} align='right'>
+                  <Col style={{ paddingTop: 10, display : "flex", flexDirection: "row", justifyContent: "flex-end" }} align='right'>
+                    <Button
+                      variant='outline-danger'
+                      size='sm'
+                      onClick={() => this.openPNRModal(reservation.pnr)}
+                    >
+                      Change PNR
+                    </Button>
+                    <div style={{ width: 12 }}></div>                  
                     <Button
                       variant='danger'
                       size='sm'
@@ -144,48 +158,51 @@ class Reservations extends Component {
 
   render() {
     return (
-      <Row
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
-        {this.state.reservations.length <= 0 && (
-          <Row style={{ width: "75%", padding: 10 }}>
-            <Col>
-              <Card>
-                <Card.Body>You don't have any reservations yet!!!</Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        )}
-        {this.state.reservations.length > 0 && (
-          <>
-            <Row style={{ width: "75%", paddingTop: 20, paddingLeft: 15 }}>
-              <Pagination>
-                <Pagination.First onClick={() => this.pageChange(1)} />
-                {this.state.paginateItems}
-                <Pagination.Last
-                  onClick={() => this.pageChange(this.state.lastPage)}
-                />
-              </Pagination>
+      <>
+        {this.state.openModal && (<PNRChangeModal oldPNR={this.state.pnrToChange} close={() => this.setState({ openModal: false})}></PNRChangeModal>)}
+        <Row
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          {this.state.reservations.length <= 0 && (
+            <Row style={{ width: "75%", padding: 10 }}>
+              <Col>
+                <Card>
+                  <Card.Body>You don't have any reservations yet!!!</Card.Body>
+                </Card>
+              </Col>
             </Row>
-            {this.state.items.map((reservation, i) => {
-              return reservation;
-            })}
-            <Row style={{ width: "75%", paddingTop: 20, paddingLeft: 15 }}>
-              <Pagination>
-                <Pagination.First onClick={() => this.pageChange(1)} />
-                {this.state.paginateItems}
-                <Pagination.Last
-                  onClick={() => this.pageChange(this.state.lastPage)}
-                />
-              </Pagination>
-            </Row>
-          </>
-        )}
-      </Row>
+          )}
+          {this.state.reservations.length > 0 && (
+            <>
+              <Row style={{ width: "75%", paddingTop: 20, paddingLeft: 15 }}>
+                <Pagination>
+                  <Pagination.First onClick={() => this.pageChange(1)} />
+                  {this.state.paginateItems}
+                  <Pagination.Last
+                    onClick={() => this.pageChange(this.state.lastPage)}
+                  />
+                </Pagination>
+              </Row>
+              {this.state.items.map((reservation, i) => {
+                return reservation;
+              })}
+              <Row style={{ width: "75%", paddingTop: 20, paddingLeft: 15 }}>
+                <Pagination>
+                  <Pagination.First onClick={() => this.pageChange(1)} />
+                  {this.state.paginateItems}
+                  <Pagination.Last
+                    onClick={() => this.pageChange(this.state.lastPage)}
+                  />
+                </Pagination>
+              </Row>
+            </>
+          )}
+        </Row>
+      </>
     );
   }
 }
