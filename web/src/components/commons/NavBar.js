@@ -49,8 +49,8 @@ class NavBar extends Component {
             width: "100%",
           }}
         >
-          <div class='container position-relative px-4 px-lg-5'>
-            <div class='row gx-4 gx-lg-5 justify-content-center'>
+          <div className='container position-relative px-4 px-lg-5'>
+            <div className='row gx-4 gx-lg-5 justify-content-center'>
               <Image src={require("../../images/railway.png")} />
             </div>
           </div>

@@ -3,8 +3,6 @@ import { routes, route, trainsByRoute, classes, schedules } from "../Services";
 
 import { Button, Form, Col, Row, Table } from "react-bootstrap";
 import Select from "react-select";
-import DatePicker from "react-datepicker";
-import moment from "moment";
 
 class Home extends Component {
   constructor(props) {
@@ -162,9 +160,8 @@ class Home extends Component {
     event.stopPropagation();
   };
 
-  handleDateChange = (dt) => {
-    const date = moment(dt).format("YYYY-MM-DD");
-    this.setState({ date: date });
+  handleDateChange = (e) => {
+    this.setState({ date: e.target.value });
   };
 
   render() {
@@ -234,14 +231,7 @@ class Home extends Component {
           </Form.Row>
           <Form.Row style={{ width: "75%", paddingBottom: 20 }}>
             <Col md={6} lg={6} xl={6}>
-              <Form.Label>Date</Form.Label>
-              <DatePicker
-                className='form-control'
-                onChange={this.handleDateChange}
-                minDate={new Date()}
-                value={this.state.date}
-                placeholderText='YYYY-MM-DD'
-              />
+              <input type='date'  className='bookingDate' onChange={this.handleDateChange}/>
             </Col>
           </Form.Row>
           <Form.Row style={{ width: "75%", paddingLeft: 5, align: "right" }}>

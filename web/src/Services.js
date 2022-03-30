@@ -62,6 +62,18 @@ export function contact(body) {
     return callPost(baseUrl + '/railway/contact', body);
 }
 
+export function reqPNRChange(body) {
+    return callPost(baseUrl + '/reqPNRChange', body);
+}
+
+export function getPNRChangeReq(body) {
+    return callPost(baseUrl + '/getPNRChangeReq', body);
+}
+
+export function actionPNRChangeReq(body) {
+    return callPost(baseUrl + '/actionPNRChangeReq', body);
+}
+
 const callGet = (url) => {
     return fetch(url).then(handleres);
 }

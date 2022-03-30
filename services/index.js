@@ -9,6 +9,7 @@ const payment = require('./routers/payment')
 const gov = require('./routers/gov')
 const user = require('./routers/user')
 const contact = require('./routers/contact')
+const pnrChange = require('./routers/pnrChange')
 const mongoose = require('mongoose')
 require('dotenv').config()
 
@@ -32,6 +33,7 @@ app.use(payment)
 app.use(gov)
 app.use(user)
 app.use(contact)
+app.use(pnrChange)
 
 app.listen(3001, err => {
     if (err) {

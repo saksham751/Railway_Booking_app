@@ -9,6 +9,10 @@ const reservationSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    name: {
+        type: String,
+        required: true,
+    },
     to: {
         type: String,
         required: true,
