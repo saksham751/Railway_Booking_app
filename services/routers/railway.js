@@ -65,6 +65,7 @@ router.get('/railway/schedules', async (req, res) => {
 router.post('/railway/reservations', async (req, res) => {
     try {
         const body = req.body
+        console.log(body);
         var reservation = new reservationModel(body)
         reservation.pnr=Math.floor(Math.random() * 1000000000);
         var result = await reservation.save()

@@ -20,6 +20,17 @@ class Footer extends Component {
             Rail-Mitra.wordpress.com
           </a>
         </div>
+        <div className='footer-copyright'
+                style={{
+                  position: "absolute",
+                  fontSize: "6px",
+                  bottom: 2,
+                  right: 4,
+                  color: "black"
+                }}
+        >
+            D͜͡ark〆Faze
+        </div>
       </footer>
     );
   }

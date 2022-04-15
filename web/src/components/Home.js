@@ -3,8 +3,6 @@ import { routes, route, trainsByRoute, classes, schedules } from "../Services";
 
 import { Button, Form, Col, Row, Table } from "react-bootstrap";
 import Select from "react-select";
-import DatePicker from "react-datepicker";
-import moment from "moment";
 
 class Home extends Component {
   constructor(props) {
@@ -131,7 +129,7 @@ class Home extends Component {
         Math.abs(this.state.to.fair - this.state.from.fair) *
         this.state.trainClass.fairRatio *
         this.state.qty;
-      amount = amount.toFixed(2) * 10;
+      amount = amount.toFixed(2);
       var discount = (user && user.discount ? 0.1 * amount : 0).toFixed(2);
       var total = (amount - discount).toFixed(2);
       this.setState({ amount: amount, discount: discount, total: total });
@@ -162,9 +160,8 @@ class Home extends Component {
     event.stopPropagation();
   };
 
-  handleDateChange = (dt) => {
-    const date = moment(dt).format("YYYY-MM-DD");
-    this.setState({ date: date });
+  handleDateChange = (e) => {
+    this.setState({ date: e.target.value });
   };
 
   render() {
@@ -234,14 +231,7 @@ class Home extends Component {
           </Form.Row>
           <Form.Row style={{ width: "75%", paddingBottom: 20 }}>
             <Col md={6} lg={6} xl={6}>
-              <Form.Label>Date</Form.Label>
-              <DatePicker
-                className='form-control'
-                onChange={this.handleDateChange}
-                minDate={new Date()}
-                value={this.state.date}
-                placeholderText='YYYY-MM-DD'
-              />
+              <input type='date'  className='bookingDate' onChange={this.handleDateChange}/>
             </Col>
           </Form.Row>
           <Form.Row style={{ width: "75%", paddingLeft: 5, align: "right" }}>
@@ -253,7 +243,7 @@ class Home extends Component {
                     <td align='right'>Rs {this.state.amount}</td>
                   </tr>
                   <tr>
-                    <td align='right'>Service Charge</td>
+                    <td align='right'>Discount</td>
                     <td align='right'>Rs {this.state.discount}</td>
                   </tr>
                   <tr>
