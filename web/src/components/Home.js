@@ -112,6 +112,7 @@ class Home extends Component {
 
   handleQtyChange = () => (event) => {
     this.setState({ qty: event.target.value }, () => this.calculateFair());
+    return 1;
   };
 
   calculateFair = () => {
@@ -231,7 +232,11 @@ class Home extends Component {
           </Form.Row>
           <Form.Row style={{ width: "75%", paddingBottom: 20 }}>
             <Col md={6} lg={6} xl={6}>
-              <input type='date'  className='bookingDate' onChange={this.handleDateChange}/>
+              <input
+                type='date'
+                className='bookingDate'
+                onChange={this.handleDateChange}
+              />
             </Col>
           </Form.Row>
           <Form.Row style={{ width: "75%", paddingLeft: 5, align: "right" }}>
@@ -271,3 +276,4 @@ class Home extends Component {
 }
 
 export default Home;
+
