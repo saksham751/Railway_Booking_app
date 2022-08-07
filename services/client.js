@@ -54,7 +54,7 @@ module.exports = {
     twilio.messages
       .create({
         body:
-          "Sri Lanka Railway - Reservation Slip \n\n Reference No : " +
+          "Indian Railway - Reservation Slip \n\n Reference No : " +
           body.reservationID +
           " \n\n From " +
           body.from +
